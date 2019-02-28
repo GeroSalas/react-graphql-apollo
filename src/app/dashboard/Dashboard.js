@@ -52,7 +52,7 @@ class Dashboard extends React.Component {
           }
 
           if (!error && !user) {
-            return <ErrorMessage error='INITIALIZATION ERROR' />;
+            return <ErrorMessage error='Cannot load admin information' />;
           }
 
           // https://www.apollographql.com/docs/react/advanced/caching.html

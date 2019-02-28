@@ -3,6 +3,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Paper, Typography } from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
+import Logger from './Logger';
 
 const styles = theme => ({
   root: {
@@ -15,6 +16,7 @@ const styles = theme => ({
 
 const ErrorMessage = (props) => {
   const { classes, error } = props;
+  Logger.error('ERROR', error);
   
   return (
     <div>
