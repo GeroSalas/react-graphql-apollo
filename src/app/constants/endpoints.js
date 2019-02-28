@@ -4,26 +4,34 @@ import gql from 'graphql-tag';
 
 export const GET_USERS = gql`
   query getUsers {
-    payload @rest(method: "GET", type: "payload", path: "/users") {
+    users @rest(method: "GET", type: "users", path: "/users") {
+      id
       name
       username
       email
+      company @type(name: "company") {
+        name
+      }
     }
   }
 `;
 
 export const GET_USER_BY_ID = gql`
   query getUserById($id: String!) {
-    payload(id: $id) @rest(method: "GET", type: "payload", path: "/users/{args.id}") {
+    user(id: $id) @rest(method: "GET", type: "user", path: "/users/{args.id}") {
+      id
       name
       email
+      company @type(name: "company") {
+        name
+      }
     }
   }
 `;
 
 export const GET_SETTINGS_BY_ID = gql`
   query getSettings($id: String) {
-    payload(id: $id) @rest(method: "GET", type: "payload", path: "/todos/{args.id}") {
+    settings(id: $id) @rest(method: "GET", type: "settings", path: "/todos/{args.id}") {
       title
       completed
     }

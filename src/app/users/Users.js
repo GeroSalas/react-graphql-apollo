@@ -27,12 +27,12 @@ const Users = (props) => {
         skip={!auth}
         notifyOnNetworkStatusChange={true}
       >
-        {({ client, loading, error, data: { payload } }) => {
+        {({ client, loading, error, data: { users } }) => {
           if (error) {
             return <ErrorMessage error={error} />;
           }
 
-          if (loading && !payload) {
+          if (loading) {
             return <Loading />;
           }
 
@@ -44,7 +44,7 @@ const Users = (props) => {
                   Users
                 </Typography>
                 <Typography component="pre">
-                  { JSON.stringify(payload) }
+                  { JSON.stringify(users) }
                 </Typography>
               </Paper>
             </div>

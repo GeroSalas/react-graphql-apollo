@@ -28,12 +28,12 @@ const Settings = (props) => {
         skip={!auth}
         notifyOnNetworkStatusChange={true}
       >
-        {({ client, loading, error, data: { payload } }) => {
+        {({ client, loading, error, data: { settings } }) => {
           if (error) {
             return <ErrorMessage error={error} />;
           }
 
-          if (loading && !payload) {
+          if (loading) {
             return <Loading />;
           }
 
@@ -45,7 +45,7 @@ const Settings = (props) => {
                   Settings
                 </Typography>
                 <Typography component="pre">
-                  { JSON.stringify(payload) }
+                  { JSON.stringify(settings) }
                 </Typography>
               </Paper>
             </div>

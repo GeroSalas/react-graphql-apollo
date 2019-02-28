@@ -42,16 +42,16 @@ class Dashboard extends React.Component {
         skip={!auth}
         notifyOnNetworkStatusChange={true}
       >
-        {({ client, loading, error, data: { payload } }) => {
+        {({ client, loading, error, data: { user } }) => {
           if (error) {
             return <ErrorMessage error={error} />;
           }
 
-          if (loading && !payload) {
+          if (loading) {
             return <Loading />;
           }
 
-          if (!error && !payload) {
+          if (!error && !user) {
             return <ErrorMessage error='INITIALIZATION ERROR' />;
           }
 
@@ -77,7 +77,7 @@ class Dashboard extends React.Component {
                     <MenuIcon />
                   </IconButton>
                   <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                    Admin Console for {payload.name}
+                    Admin Console for {user.name}
                   </Typography>
                   <Button color="inherit" onClick={this.props.logout}>Logout</Button>
                 </Toolbar>
@@ -100,8 +100,8 @@ class Dashboard extends React.Component {
               <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Switch>
-                  <Route path='/admin/users' render={_ => <Users data={payload} auth={auth} />}/>
-                  <Route path='/admin/settings' render={_ => <Settings auth={auth} />}/>
+                  <Route path='/admin/users' render={_ => <Users auth={user} />}/>
+                  <Route path='/admin/settings' render={_ => <Settings auth={user} />}/>
                   <Redirect to='/admin/users' />
                 </Switch>
               </main>
