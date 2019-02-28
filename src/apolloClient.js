@@ -19,13 +19,16 @@ const authLink = new ApolloLink((operation, forward) => {
             }
         };
     });
-return forward(operation).map(result => {
+    return forward(operation).map(result => {
         const { restResponses } = operation.getContext();
         const authTokenResponse = restResponses.find(res => res.url.includes('login') && res.headers.has('Authorization'));
-        // You might also filter on res.url to find the response of a specific API call
-        return authTokenResponse
-            ? localStorage.setItem('token', authTokenResponse.headers.get('Authorization')).then(() => result)
-            : result;
+        // TODO: Login response should return JWT on the 'Authorization' header
+        if (authTokenResponse) {
+            const token = authTokenResponse.headers.get('Authorization');
+            localStorage.setItem('access_token', token);
+        }
+
+        return result;
     });
 });
 
