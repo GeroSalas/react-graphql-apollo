@@ -30,7 +30,6 @@ return forward(operation).map(result => {
 });
 
 const errorLink = onError(({ restErrors, networkError }) => {
-    debugger;
     if (restErrors) {
         restErrors.map(({ message, locations, path }) =>
             console.error(`[REST API error]: Message: ${message}`),

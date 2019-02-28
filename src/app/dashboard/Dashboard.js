@@ -11,10 +11,12 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Navbar from '../shared/Navbar';
 import Loading from '../utils/Loading';
 import ErrorMessage from '../utils/Error';
+import Logger from '../utils/Logger';
+
 import Users from '../users/Users';
 import Settings from '../settings/Settings';
 
-import { GET_TODO_BY_ID } from '../constants/endpoints';
+import { GET_USER_BY_ID } from '../constants/endpoints';
 import dashboardStyles from './Dashboard.styles';
 
 class Dashboard extends React.Component {
@@ -35,7 +37,7 @@ class Dashboard extends React.Component {
 
     return (
       <Query
-        query={GET_TODO_BY_ID}
+        query={GET_USER_BY_ID}
         variables={{ id: auth.id }}
         skip={!auth}
         notifyOnNetworkStatusChange={true}
@@ -53,7 +55,8 @@ class Dashboard extends React.Component {
             return <ErrorMessage error='INITIALIZATION ERROR' />;
           }
 
-          console.log('cache state: ', client.cache.data.data.ROOT_QUERY);
+          // https://www.apollographql.com/docs/react/advanced/caching.html
+          Logger.debug('CACHE STATE', client.cache.data.data.ROOT_QUERY);
           return (
             <div className={classes.root}>
               <CssBaseline />
@@ -74,7 +77,7 @@ class Dashboard extends React.Component {
                     <MenuIcon />
                   </IconButton>
                   <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                    Admin Console
+                    Admin Console for {payload.name}
                   </Typography>
                   <Button color="inherit" onClick={this.props.logout}>Logout</Button>
                 </Toolbar>
@@ -97,8 +100,8 @@ class Dashboard extends React.Component {
               <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Switch>
-                  <Route path='/admin/users' render={_ => <Users data={payload} />}/>
-                  <Route path='/admin/settings' render={_ => <Settings data={payload} />}/>
+                  <Route path='/admin/users' render={_ => <Users data={payload} auth={auth} />}/>
+                  <Route path='/admin/settings' render={_ => <Settings auth={auth} />}/>
                   <Redirect to='/admin/users' />
                 </Switch>
               </main>

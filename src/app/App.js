@@ -3,6 +3,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { Switch, Route } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute'
 import Storage from './utils/Storage';
+import Logger from './utils/Logger';
 
 import Login from './auth/Login'
 import Dashboard from './dashboard/Dashboard'
@@ -32,6 +33,8 @@ class App extends Component {
   render() {
     const { classes } = this.props;
     const currentUser = this.getCurrentAuthSession();
+    Logger.info('App', this.props);
+    Logger.info('getCurrentAuthSession', currentUser);
 
     return (
       <div className={classes.app}>
