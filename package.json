@@ -1,7 +1,24 @@
 {
   "name": "react-graphql-apollo",
+  "description": "An admin-app boilerplate with ReactJS + ApolloREST",
+  "keywords": [
+    "js",
+    "react",
+    "apollo",
+    "rest"
+  ],
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Geronimo E. Perez Salas",
+    "email": "geronimo.perez.salas@gmail.com",
+    "url": "https://github.com/GeroSalas"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GeroSalas/react-graphql-apollo.git"
+  },
+  "bugs": "https://github.com/GeroSalas/react-graphql-apollo/issues",
   "dependencies": {
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
@@ -31,6 +48,10 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "engines": {
+    "node": ">= 10.13.0",
+    "npm": ">= 6.4.1"
   },
   "browserslist": [
     ">0.2%",
